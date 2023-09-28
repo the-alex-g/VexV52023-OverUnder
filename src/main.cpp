@@ -7,8 +7,10 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-#include "functions.h"
 #include "vex.h"
+#include "functions.h"
+
+using namespace vex;
 
 // A global instance of competition
 competition Competition;
@@ -69,6 +71,15 @@ int main() {
   // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
+
+  // move this code to pre_auton once you get the chance
+  controller1.ButtonA.pressed(moveIntakeArm);
+  controller1.ButtonR1.pressed(spinIntakeIn);
+  controller1.ButtonR2.pressed(spinIntakeOut);
+  intakeArm.setPosition(0.0, degrees);
+  intakeArm.setVelocity(50, percent);
+  intake.setBrake(hold);
+  intake.setVelocity(100.0, percent);
 
   usercontrol(); // for testing just the usercontrol code
   //pre_auton();
