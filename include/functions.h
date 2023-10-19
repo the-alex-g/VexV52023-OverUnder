@@ -29,7 +29,7 @@ void runDriveMotors() {
 
 
 void spinIntakeIn() {
-    intake.spin(fwd);
+    intake.spin(reverse);
     while (controller1.ButtonR1.pressing()) {
         wait(20.0, msec);
     }
@@ -38,7 +38,7 @@ void spinIntakeIn() {
 
 
 void spinIntakeOut() {
-    intake.spin(reverse);
+    intake.spin(fwd);
     while (controller1.ButtonR2.pressing()) {
         wait(20.0, msec);
     }
