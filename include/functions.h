@@ -10,10 +10,7 @@ controller controller1 = controller(primary);
 
 motor leftDrive = motor(PORT1, ratio18_1, true);
 motor rightDrive = motor(PORT2, ratio18_1, true);
-motor intakeArm = motor(PORT3, ratio18_1, true);
-motor intake = motor(PORT4, ratio18_1, true);
-
-bool armDown = false;
+motor intake = motor(PORT3, ratio18_1, true);
 
 
 void runDriveMotors() {
@@ -31,36 +28,19 @@ void runDriveMotors() {
 }
 
 
-void moveIntakeArm() {
-    if (! intakeArm.isSpinning()) {
-        if (armDown) {
-            intakeArm.spinTo(0.0, degrees);
-            armDown = false;
-        } else {
-            intakeArm.spinTo(1100, degrees);
-            armDown = true;
-        }
-    }
-}
-
-
 void spinIntakeIn() {
-  //  if (armDown) {
-        intake.spin(reverse);
-        while (controller1.ButtonR1.pressing()) {
-            wait(20.0, msec);
-        }
-        intake.stop();
-    //}
+    intake.spin(fwd);
+    while (controller1.ButtonR1.pressing()) {
+        wait(20.0, msec);
+    }
+    intake.stop();
 }
 
 
 void spinIntakeOut() {
-   // if (armDown) {
-        intake.spin(fwd);
-        while (controller1.ButtonR2.pressing()) {
-            wait(20.0, msec);
-        }
-        intake.stop();
-    //}
+    intake.spin(reverse);
+    while (controller1.ButtonR2.pressing()) {
+        wait(20.0, msec);
+    }
+    intake.stop();
 }
