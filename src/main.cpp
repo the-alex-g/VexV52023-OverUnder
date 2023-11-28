@@ -75,8 +75,11 @@ int main() {
   // move this code to pre_auton once you get the chance
   controller1.ButtonR1.pressed(spinIntakeIn);
   controller1.ButtonR2.pressed(spinIntakeOut);
+  controller1.ButtonY.pressed(spinCatapult);
   intake.setBrake(hold);
-  intake.setVelocity(100.0, percent);
+  intake.setVelocity(intakePercentVelocity, percent);
+  catapult.setBrake(hold);
+  catapult.setVelocity(catapultPercentVelocity, percent);
 
   usercontrol(); // for testing just the usercontrol code
   //pre_auton();

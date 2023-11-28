@@ -11,6 +11,10 @@ controller controller1 = controller(primary);
 motor leftDrive = motor(PORT1, ratio18_1, false);
 motor rightDrive = motor(PORT2, ratio18_1, true);
 motor intake = motor(PORT3, ratio18_1, false);
+motor catapult = motor(PORT4, ratio18_1, true);
+
+double catapultPercentVelocity = 75.0;
+double intakePercentVelocity = 100.0;
 
 
 void runDriveMotors() {
@@ -43,4 +47,13 @@ void spinIntakeOut() {
         wait(20.0, msec);
     }
     intake.stop();
+}
+
+
+void spinCatapult() {
+    catapult.spin(fwd);
+    while (controller1.ButtonY.pressing()) {
+        wait(20.0, msec);
+    }
+    catapult.stop();
 }
