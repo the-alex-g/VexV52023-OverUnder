@@ -8,9 +8,9 @@ brain Brain;
 
 controller controller1 = controller(primary);
 
-motor leftDrive = motor(PORT1, ratio18_1, true);
+motor leftDrive = motor(PORT1, ratio18_1, false);
 motor rightDrive = motor(PORT2, ratio18_1, true);
-motor intake = motor(PORT3, ratio18_1, true);
+motor intake = motor(PORT3, ratio18_1, false);
 
 
 void runDriveMotors() {
@@ -23,13 +23,13 @@ void runDriveMotors() {
     leftDrive.setVelocity(leftVelocity, percent);
     rightDrive.setVelocity(rightVelocity, percent);
 
-    leftDrive.spin(reverse);
+    leftDrive.spin(fwd);
     rightDrive.spin(fwd);
 }
 
 
 void spinIntakeIn() {
-    intake.spin(reverse);
+    intake.spin(fwd);
     while (controller1.ButtonR1.pressing()) {
         wait(20.0, msec);
     }
@@ -38,7 +38,7 @@ void spinIntakeIn() {
 
 
 void spinIntakeOut() {
-    intake.spin(fwd);
+    intake.spin(reverse);
     while (controller1.ButtonR2.pressing()) {
         wait(20.0, msec);
     }
