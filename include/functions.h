@@ -8,10 +8,10 @@ brain Brain;
 
 controller controller1 = controller(primary);
 
-motor leftDrive = motor(PORT1, ratio18_1, false);
-motor rightDrive = motor(PORT2, ratio18_1, true);
-motor intake = motor(PORT3, ratio18_1, false);
-motor catapult = motor(PORT4, ratio18_1, true);
+motor leftDrive = motor(PORT11, ratio18_1, false);
+motor rightDrive = motor(PORT12, ratio18_1, true);
+motor intake = motor(PORT13, ratio18_1, false);
+motor catapult = motor(PORT14, ratio18_1, true);
 
 double catapultPercentVelocity = 75.0;
 double intakePercentVelocity = 100.0;
