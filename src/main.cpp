@@ -75,7 +75,8 @@ int main() {
   // move this code to pre_auton once you get the chance
   controller1.ButtonR1.pressed(spinIntakeIn);
   controller1.ButtonR2.pressed(spinIntakeOut);
-  controller1.ButtonY.pressed(spinCatapult);
+  controller1.ButtonY.pressed(fireCatapult);
+  controller1.ButtonX.pressed(primeCatapult);
   intake.setBrake(hold);
   intake.setVelocity(intakePercentVelocity, percent);
   catapult.setBrake(hold);
