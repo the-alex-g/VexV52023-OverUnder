@@ -80,7 +80,6 @@ int main() {
   intake.setBrake(hold);
   intake.setVelocity(intakePercentVelocity, percent);
   catapult.setBrake(hold);
-  catapult.setVelocity(catapultPercentVelocity, percent);
 
   usercontrol(); // for testing just the usercontrol code
   //pre_auton();

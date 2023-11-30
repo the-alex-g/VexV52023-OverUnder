@@ -13,7 +13,8 @@ motor rightDrive = motor(PORT12, ratio18_1, true);
 motor intake = motor(PORT13, ratio18_1, false);
 motor catapult = motor(PORT14, ratio18_1, true);
 
-const double catapultPercentVelocity = 50.0;
+const double minCatapultPercentVelocity = 50.0;
+const double maxCatapultPercentVelocity = 100.0;
 const double intakePercentVelocity = 100.0;
 const double catapultPullbackCurrent = 35.0;
 
@@ -53,6 +54,7 @@ void spinIntakeOut() {
 
 void fireCatapult() {
     catapult.spin(fwd);
+    catapult.setVelocity(maxCatapultPercentVelocity, percent);
     while (controller1.ButtonY.pressing()) {
         wait(20.0, msec);
     }
@@ -60,10 +62,16 @@ void fireCatapult() {
 }
 
 
+double lerp(double from, double to, double weight) {
+    return from + (to - from) * weight;
+}
+
+
 void primeCatapult() {
     catapult.spin(fwd);
     while (catapult.current(percent) < catapultPullbackCurrent) {
         wait(20.0, msec);
+        catapult.setVelocity(lerp(maxCatapultPercentVelocity, minCatapultPercentVelocity, catapult.current(percent) / catapultPullbackCurrent), percent);
     }
     catapult.stop();
 }
