@@ -12,11 +12,14 @@ motor leftDrive = motor(PORT11, ratio18_1, false);
 motor rightDrive = motor(PORT12, ratio18_1, true);
 motor intake = motor(PORT13, ratio18_1, false);
 motor catapult = motor(PORT14, ratio18_1, true);
+motor wings = motor(PORT15, ratio18_1, false);
 
 const double minCatapultPercentVelocity = 50.0;
 const double maxCatapultPercentVelocity = 100.0;
 const double intakePercentVelocity = 100.0;
 const double catapultPullbackCurrent = 35.0;
+
+bool wingsExtended = true;
 
 
 void runDriveMotors() {
@@ -74,4 +77,18 @@ void primeCatapult() {
         catapult.setVelocity(lerp(maxCatapultPercentVelocity, minCatapultPercentVelocity, catapult.current(percent) / catapultPullbackCurrent), percent);
     }
     catapult.stop();
+}
+
+
+void moveWings() {
+    if (wingsExtended) {
+        wings.spin(fwd);
+    } else {
+        wings.spin(reverse);
+    }
+    while (controller1.ButtonA.pressing()) {
+        wait(20.0, msec);
+    }
+    wings.stop();
+    wingsExtended = ! wingsExtended;
 }
