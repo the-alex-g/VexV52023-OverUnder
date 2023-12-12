@@ -12,7 +12,8 @@ motor leftDrive = motor(PORT11, ratio18_1, false);
 motor rightDrive = motor(PORT12, ratio18_1, true);
 motor intake = motor(PORT13, ratio18_1, false);
 motor catapult = motor(PORT14, ratio18_1, true);
-motor wings = motor(PORT15, ratio18_1, false);
+motor leftWing = motor(PORT15, ratio18_1, false);
+motor rightWing = motor(PORT16, ratio18_1, true);
 
 const double minCatapultPercentVelocity = 50.0;
 const double maxCatapultPercentVelocity = 100.0;
@@ -80,15 +81,30 @@ void primeCatapult() {
 }
 
 
+
+void spinWings(directionType direction) {
+    leftWing.spin(direction);
+    rightWing.spin(direction);
+}
+
+
+void stopWings() {
+    leftWing.stop();
+    rightWing.stop();
+}
+
+
 void moveWings() {
     if (wingsExtended) {
-        wings.spin(fwd);
+        spinWings(reverse);
     } else {
-        wings.spin(reverse);
+        spinWings(fwd);
     }
     while (controller1.ButtonA.pressing()) {
+        Brain.Screen.clearScreen();
+        Brain.Screen.print(leftWing.current());
         wait(20.0, msec);
     }
-    wings.stop();
+    stopWings();
     wingsExtended = ! wingsExtended;
 }
