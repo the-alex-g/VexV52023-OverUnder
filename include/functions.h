@@ -18,7 +18,7 @@ motor rightWing = motor(PORT16, ratio18_1, true);
 const double minCatapultPercentVelocity = 50.0;
 const double maxCatapultPercentVelocity = 100.0;
 const double intakePercentVelocity = 100.0;
-const double catapultPullbackCurrent = 35.0;
+double catapultPullbackCurrent = 44.0;
 
 bool wingsExtended = true;
 
@@ -79,7 +79,6 @@ void primeCatapult() {
     }
     catapult.stop();
 }
-
 
 
 void spinWings(directionType direction) {
