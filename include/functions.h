@@ -8,9 +8,7 @@ brain Brain;
 
 controller controller1 = controller(primary);
 
-motor leftDrive = motor(PORT11, ratio18_1, false);
-motor rightDrive = motor(PORT12, ratio18_1, true);
-motor intake = motor(PORT13, ratio18_1, false);
+motor intake = motor(PORT19, ratio18_1, false);
 motor catapult = motor(PORT14, ratio18_1, true);
 motor leftWing = motor(PORT15, ratio18_1, false);
 motor rightWing = motor(PORT16, ratio18_1, true);
@@ -22,6 +20,36 @@ double catapultPullbackCurrent = 44.0;
 
 bool wingsExtended = true;
 
+class DriveTrain {
+private:
+    motor leftForwardDrive = motor(PORT17, ratio18_1, false);
+    motor leftRearDrive = motor(PORT11, ratio18_1, false);
+    motor rightForwardDrive = motor(PORT18, ratio18_1, true);
+    motor rightRearDrive = motor(PORT12, ratio18_1, true); 
+public:
+    void spinLeft(double velocity, directionType direction);
+    void spinRight(double velocity, directionType direction);
+};
+
+
+DriveTrain driveTrain;
+
+
+void DriveTrain::spinLeft(double velocity, directionType direction = fwd) {
+    leftForwardDrive.setVelocity(velocity, percent);
+    leftRearDrive.setVelocity(velocity, percent);
+    leftForwardDrive.spin(direction);
+    leftRearDrive.spin(direction);
+}
+
+
+void DriveTrain::spinRight(double velocity, directionType direction = fwd) {
+    rightForwardDrive.setVelocity(velocity, percent);
+    rightRearDrive.setVelocity(velocity, percent);
+    rightForwardDrive.spin(direction);
+    rightRearDrive.spin(direction);
+}
+
 
 void runDriveMotors() {
     double forward = controller1.Axis3.position() / 2.0;
@@ -30,11 +58,8 @@ void runDriveMotors() {
     double leftVelocity = forward + turn;
     double rightVelocity = forward - turn;
 
-    leftDrive.setVelocity(leftVelocity, percent);
-    rightDrive.setVelocity(rightVelocity, percent);
-
-    leftDrive.spin(fwd);
-    rightDrive.spin(fwd);
+    driveTrain.spinLeft(leftVelocity);
+    driveTrain.spinRight(rightVelocity);
 }
 
 
