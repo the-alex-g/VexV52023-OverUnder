@@ -77,11 +77,6 @@ int main() {
   controller1.ButtonR2.pressed(spinIntakeOut);
   controller1.ButtonY.pressed(fireCatapult);
   controller1.ButtonX.pressed(primeCatapult);
-  controller1.ButtonA.pressed(moveWings);
-  leftWing.setBrake(hold);
-  rightWing.setBrake(hold);
-  leftWing.setVelocity(25.0, percent);
-  rightWing.setVelocity(25.0, percent);
   intake.setBrake(hold);
   intake.setVelocity(intakePercentVelocity, percent);
   catapult.setBrake(hold);

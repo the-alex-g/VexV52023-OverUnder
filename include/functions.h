@@ -8,24 +8,20 @@ brain Brain;
 
 controller controller1 = controller(primary);
 
-motor intake = motor(PORT19, ratio18_1, false);
-motor catapult = motor(PORT14, ratio18_1, true);
-motor leftWing = motor(PORT15, ratio18_1, false);
-motor rightWing = motor(PORT16, ratio18_1, true);
+motor intake = motor(PORT18, ratio18_1, false);
+motor catapult = motor(PORT17, ratio18_1, true);
 
 const double minCatapultPercentVelocity = 50.0;
 const double maxCatapultPercentVelocity = 100.0;
 const double intakePercentVelocity = 100.0;
 double catapultPullbackCurrent = 44.0;
 
-bool wingsExtended = true;
-
 class DriveTrain {
 private:
-    motor leftForwardDrive = motor(PORT17, ratio18_1, false);
-    motor leftRearDrive = motor(PORT11, ratio18_1, false);
-    motor rightForwardDrive = motor(PORT18, ratio18_1, true);
-    motor rightRearDrive = motor(PORT12, ratio18_1, true); 
+    motor leftForwardDrive = motor(PORT11, ratio18_1, false);
+    motor leftRearDrive = motor(PORT12, ratio18_1, false);
+    motor rightForwardDrive = motor(PORT19, ratio18_1, true);
+    motor rightRearDrive = motor(PORT20, ratio18_1, true); 
 public:
     void spinLeft(double velocity, directionType direction);
     void spinRight(double velocity, directionType direction);
@@ -103,32 +99,4 @@ void primeCatapult() {
         catapult.setVelocity(lerp(maxCatapultPercentVelocity, minCatapultPercentVelocity, catapult.current(percent) / catapultPullbackCurrent), percent);
     }
     catapult.stop();
-}
-
-
-void spinWings(directionType direction) {
-    leftWing.spin(direction);
-    rightWing.spin(direction);
-}
-
-
-void stopWings() {
-    leftWing.stop();
-    rightWing.stop();
-}
-
-
-void moveWings() {
-    if (wingsExtended) {
-        spinWings(reverse);
-    } else {
-        spinWings(fwd);
-    }
-    while (controller1.ButtonA.pressing()) {
-        Brain.Screen.clearScreen();
-        Brain.Screen.print(leftWing.current());
-        wait(20.0, msec);
-    }
-    stopWings();
-    wingsExtended = ! wingsExtended;
 }
