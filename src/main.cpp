@@ -7,10 +7,8 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-#include "vex.h"
-#include "functions.h"
-
-using namespace vex;
+#include "universals.h"
+#include "functionInterface.h"
 
 // A global instance of competition
 competition Competition;

@@ -1,12 +1,9 @@
 #pragma once
 
-#include "vex.h"
+#include "universals.h"
+#include "pneumatics.h"
+#include "drivetrain.h"
 
-using namespace vex;
-
-brain Brain;
-
-controller controller1 = controller(primary);
 
 motor intake = motor(PORT18, ratio18_1, false);
 motor catapult = motor(PORT17, ratio18_1, true);
@@ -15,59 +12,6 @@ const double minCatapultPercentVelocity = 50.0;
 const double maxCatapultPercentVelocity = 100.0;
 const double intakePercentVelocity = 100.0;
 double catapultPullbackCurrent = 44.0;
-
-class DriveTrain {
-private:
-    motor leftForwardDrive = motor(PORT11, ratio18_1, false);
-    motor leftRearDrive = motor(PORT12, ratio18_1, false);
-    motor rightForwardDrive = motor(PORT19, ratio18_1, true);
-    motor rightRearDrive = motor(PORT20, ratio18_1, true); 
-public:
-    void spinLeft(double velocity, directionType direction);
-    void spinRight(double velocity, directionType direction);
-};
-
-
-class PneumaticSystem {
-private:
-    pneumatics leftWing = pneumatics(Brain.ThreeWirePort.A);
-    pneumatics rightWing = pneumatics(Brain.ThreeWirePort.B);
-public:
-    bool wingsOpen = false;
-    void setWingsOpen(bool value);
-};
-
-
-DriveTrain driveTrain;
-PneumaticSystem pneumaticSystem;
-
-
-void DriveTrain::spinLeft(double velocity, directionType direction = fwd) {
-    leftForwardDrive.setVelocity(velocity, percent);
-    leftRearDrive.setVelocity(velocity, percent);
-    leftForwardDrive.spin(direction);
-    leftRearDrive.spin(direction);
-}
-
-
-void DriveTrain::spinRight(double velocity, directionType direction = fwd) {
-    rightForwardDrive.setVelocity(velocity, percent);
-    rightRearDrive.setVelocity(velocity, percent);
-    rightForwardDrive.spin(direction);
-    rightRearDrive.spin(direction);
-}
-
-
-void PneumaticSystem::setWingsOpen(bool value) {
-    if (value) {
-        leftWing.open();
-        rightWing.open();
-    } else {
-        leftWing.close();
-        rightWing.close();
-    }
-    wingsOpen = value;
-}
 
 
 void runDriveMotors() {
