@@ -28,7 +28,18 @@ public:
 };
 
 
+class PneumaticSystem {
+private:
+    pneumatics leftWing = pneumatics(Brain.ThreeWirePort.A);
+    pneumatics rightWing = pneumatics(Brain.ThreeWirePort.B);
+public:
+    bool wingsOpen = false;
+    void setWingsOpen(bool value);
+};
+
+
 DriveTrain driveTrain;
+PneumaticSystem pneumaticSystem;
 
 
 void DriveTrain::spinLeft(double velocity, directionType direction = fwd) {
@@ -44,6 +55,18 @@ void DriveTrain::spinRight(double velocity, directionType direction = fwd) {
     rightRearDrive.setVelocity(velocity, percent);
     rightForwardDrive.spin(direction);
     rightRearDrive.spin(direction);
+}
+
+
+void PneumaticSystem::setWingsOpen(bool value) {
+    if (value) {
+        leftWing.open();
+        rightWing.open();
+    } else {
+        leftWing.close();
+        rightWing.close();
+    }
+    wingsOpen = value;
 }
 
 
@@ -99,4 +122,9 @@ void primeCatapult() {
         catapult.setVelocity(lerp(maxCatapultPercentVelocity, minCatapultPercentVelocity, catapult.current(percent) / catapultPullbackCurrent), percent);
     }
     catapult.stop();
+}
+
+
+void toggleWingState() {
+    pneumaticSystem.setWingsOpen(! pneumaticSystem.wingsOpen);
 }
