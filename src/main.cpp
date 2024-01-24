@@ -26,9 +26,13 @@ competition Competition;
 /*---------------------------------------------------------------------------*/
 
 void pre_auton() {
-
-  // All activities that occur before the competition starts
-  // Example: clearing encoders, setting servo positions, ...
+  controller1.ButtonR1.pressed(spinIntakeIn);
+  controller1.ButtonR2.pressed(spinIntakeOut);
+  controller1.ButtonY.pressed(fireCatapult);
+  controller1.ButtonX.pressed(primeCatapult);
+  intake.setBrake(hold);
+  intake.setVelocity(intakePercentVelocity, percent);
+  catapult.setBrake(hold);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -72,17 +76,7 @@ int main() {
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
 
-  // move this code to pre_auton once you get the chance
-  controller1.ButtonR1.pressed(spinIntakeIn);
-  controller1.ButtonR2.pressed(spinIntakeOut);
-  controller1.ButtonY.pressed(fireCatapult);
-  controller1.ButtonX.pressed(primeCatapult);
-  intake.setBrake(hold);
-  intake.setVelocity(intakePercentVelocity, percent);
-  catapult.setBrake(hold);
-
-  usercontrol(); // for testing just the usercontrol code
-  //pre_auton();
+  pre_auton();
 
   // Prevent main from exiting with an infinite loop.
   while (true) {
