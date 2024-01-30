@@ -5,7 +5,8 @@
 
 class PneumaticSystem {
 private:
-    pneumatics wings = pneumatics(Brain.ThreeWirePort.A);
+    pneumatics wingRight = pneumatics(Brain.ThreeWirePort.A);
+    pneumatics wingLeft = pneumatics(Brain.ThreeWirePort.B);
 public:
     bool wingsOpen = false;
     void setWingsOpen(bool value);
@@ -16,9 +17,11 @@ PneumaticSystem pneumaticSystem;
 
 void PneumaticSystem::setWingsOpen(bool value) {
     if (value) {
-        wings.open();
+        wingLeft.open();
+        wingRight.open();
     } else {
-        wings.close();
+        wingLeft.close();
+        wingRight.close();
     }
     wingsOpen = value;
 }
