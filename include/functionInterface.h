@@ -3,15 +3,12 @@
 #include "universals.h"
 #include "pneumatics.h"
 #include "drivetrain.h"
+#include "catapult.h"
 
 
 motor intake = motor(PORT18, ratio18_1, false);
-motor catapult = motor(PORT17, ratio18_1, true);
 
-const double minCatapultPercentVelocity = 50.0;
-const double maxCatapultPercentVelocity = 100.0;
 const double intakePercentVelocity = 100.0;
-double catapultPullbackCurrent = 44.0;
 
 
 void runDriveMotors() {
@@ -45,28 +42,23 @@ void spinIntakeOut() {
 
 
 void fireCatapult() {
-    catapult.spin(fwd);
-    catapult.setVelocity(maxCatapultPercentVelocity, percent);
-    while (controller1.ButtonY.pressing()) {
-        wait(20.0, msec);
-    }
-    catapult.stop();
+   catapult.spinCatapult();
 }
 
 
-double lerp(double from, double to, double weight) {
-    return from + (to - from) * weight;
-}
+// double lerp(double from, double to, double weight) {
+//     return from + (to - from) * weight;
+// }
 
 
-void primeCatapult() {
-    catapult.spin(fwd);
-    while (catapult.current(percent) < catapultPullbackCurrent) {
-        wait(20.0, msec);
-        catapult.setVelocity(lerp(maxCatapultPercentVelocity, minCatapultPercentVelocity, catapult.current(percent) / catapultPullbackCurrent), percent);
-    }
-    catapult.stop();
-}
+// void primeCatapult() {
+//     catapult.spin(fwd);
+//     while (catapult.current(percent) < catapultPullbackCurrent) {
+//         wait(20.0, msec);
+//         catapult.setVelocity(lerp(maxCatapultPercentVelocity, minCatapultPercentVelocity, catapult.current(percent) / catapultPullbackCurrent), percent);
+//     }
+//     catapult.stop();
+// }
 
 
 void toggleWingState() {

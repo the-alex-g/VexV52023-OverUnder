@@ -12,8 +12,6 @@ public:
     void setWingsOpen(bool value);
 };
 
-PneumaticSystem pneumaticSystem;
-
 
 void PneumaticSystem::setWingsOpen(bool value) {
     if (value) {
@@ -25,3 +23,6 @@ void PneumaticSystem::setWingsOpen(bool value) {
     }
     wingsOpen = value;
 }
+
+ 
+PneumaticSystem pneumaticSystem;

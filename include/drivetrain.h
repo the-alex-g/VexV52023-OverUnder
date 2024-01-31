@@ -14,8 +14,6 @@ public:
     void spinRight(double velocity, directionType direction);
 };
 
-DriveTrain driveTrain;
-
 
 void DriveTrain::spinLeft(double velocity, directionType direction = fwd) {
     leftForwardDrive.setVelocity(velocity, percent);
@@ -31,3 +29,6 @@ void DriveTrain::spinRight(double velocity, directionType direction = fwd) {
     rightForwardDrive.spin(direction);
     rightRearDrive.spin(direction);
 }
+
+
+DriveTrain driveTrain;
