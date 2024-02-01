@@ -24,10 +24,10 @@ competition Competition;
 /*---------------------------------------------------------------------------*/
 
 void pre_auton() {
-  controller1.ButtonR1.pressed(spinIntakeIn);
-  controller1.ButtonR2.pressed(spinIntakeOut);
+  intake.intakeInButton.pressed(spinIntakeIn);
+  intake.intakeOutButton.pressed(spinIntakeOut);
   catapult.spinCatapultButton.pressed(fireCatapult);
-  controller1.ButtonA.pressed(toggleWingState);
+  pneumaticSystem.toggleWingsButton.pressed(toggleWingState);
 }
 
 /*---------------------------------------------------------------------------*/
