@@ -28,8 +28,6 @@ void pre_auton() {
   controller1.ButtonR2.pressed(spinIntakeOut);
   catapult.spinCatapultButton.pressed(fireCatapult);
   controller1.ButtonA.pressed(toggleWingState);
-  intake.setBrake(hold);
-  intake.setVelocity(intakePercentVelocity, percent);
 }
 
 /*---------------------------------------------------------------------------*/

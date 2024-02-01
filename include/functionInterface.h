@@ -4,11 +4,7 @@
 #include "pneumatics.h"
 #include "drivetrain.h"
 #include "catapult.h"
-
-
-motor intake = motor(PORT18, ratio18_1, false);
-
-const double intakePercentVelocity = 100.0;
+#include "intake.h"
 
 
 void runDriveMotors() {
@@ -24,20 +20,12 @@ void runDriveMotors() {
 
 
 void spinIntakeIn() {
-    intake.spin(fwd);
-    while (controller1.ButtonR1.pressing()) {
-        wait(20.0, msec);
-    }
-    intake.stop();
+    intake.spinIntakeIn();
 }
 
 
 void spinIntakeOut() {
-    intake.spin(reverse);
-    while (controller1.ButtonR2.pressing()) {
-        wait(20.0, msec);
-    }
-    intake.stop();
+    intake.spinIntakeOut();
 }
 
 
