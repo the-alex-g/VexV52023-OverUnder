@@ -5,6 +5,7 @@
 #include "drivetrain.h"
 #include "catapult.h"
 #include "intake.h"
+#include "blocker.h"
 
 
 void runDriveMotors() {
@@ -29,6 +30,11 @@ void fireCatapult() {
 
 void toggleWingState() {
     pneumaticSystem.toggleWingsOpen();
+}
+
+
+void toggleBlockerExtended() {
+    blocker.toggleExtended();
 }
 
 

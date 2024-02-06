@@ -55,8 +55,8 @@ void DriveTrain::drive() {
     double leftVelocity = forward + turn;
     double rightVelocity = forward - turn;
 
-    driveTrain.spinLeft(leftVelocity);
-    driveTrain.spinRight(rightVelocity);
+    spinLeft(leftVelocity);
+    spinRight(rightVelocity);
 }
 
 

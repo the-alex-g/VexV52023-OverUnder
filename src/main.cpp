@@ -28,6 +28,7 @@ void pre_auton() {
   intake.intakeOutButton.pressed(spinIntakeOut);
   catapult.spinCatapultButton.pressed(fireCatapult);
   pneumaticSystem.toggleWingsButton.pressed(toggleWingState);
+  blocker.extendButton.pressed(toggleBlockerExtended);
 }
 
 /*---------------------------------------------------------------------------*/

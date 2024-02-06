@@ -14,7 +14,7 @@ public:
     Intake();
     void spinIntakeOut();
     void spinIntakeIn();
-}
+};
 
 
 Intake::Intake() {
