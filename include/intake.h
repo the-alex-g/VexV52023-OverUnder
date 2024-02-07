@@ -14,6 +14,8 @@ public:
     Intake();
     void spinIntakeOut();
     void spinIntakeIn();
+    void spinIntakeInFor(double seconds);
+    void spinIntakeOutFor(double seconds);
 };
 
 
@@ -36,6 +38,27 @@ void Intake::spinIntakeOut() {
     intakeMotor.spin(reverse);
     while (intakeOutButton.pressing()) {
         wait(20.0, msec);
+    }
+    intakeMotor.stop();
+}
+
+void Intake::spinIntakeInFor(double seconds) {
+    intakeMotor.spin(fwd);
+    double timeElapsed = 0.0;
+    while (timeElapsed < seconds) {
+        wait(0.1, sec);
+        timeElapsed += 0.1;
+    }
+    intakeMotor.stop();
+}
+
+
+void Intake::spinIntakeOutFor(double seconds) {
+    intakeMotor.spin(reverse);
+    double timeElapsed = 0.0;
+    while (timeElapsed < seconds) {
+        wait(0.1, sec);
+        timeElapsed += 0.1;
     }
     intakeMotor.stop();
 }

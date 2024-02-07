@@ -9,6 +9,7 @@
 
 #include "universals.h"
 #include "functionInterface.h"
+#include "autonomous.h"
 
 // A global instance of competition
 competition Competition;
@@ -42,9 +43,7 @@ void pre_auton() {
 /*---------------------------------------------------------------------------*/
 
 void autonomous() {
-  // ..........................................................................
-  // Insert autonomous user code here.
-  // ..........................................................................
+  runAuton();
 }
 
 /*---------------------------------------------------------------------------*/
