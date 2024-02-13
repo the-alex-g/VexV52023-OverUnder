@@ -7,7 +7,7 @@ class Catapult {
 private:
     const double minCatapultPercentVelocity = 50.0;
     const double maxCatapultPercentVelocity = 100.0;
-    motor catapultMotor = motor(PORT17, ratio18_1, true);
+    motor catapultMotor = motor(PORT12, ratio18_1, true);
 public:
     const controller::button spinCatapultButton = controller1.ButtonY;
     Catapult();

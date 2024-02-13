@@ -12,13 +12,14 @@ double sign(double value) {
 class DriveTrain {
 private:
     motor leftForwardDrive = motor(PORT11, ratio18_1, false);
-    motor leftRearDrive = motor(PORT12, ratio18_1, false);
-    motor rightForwardDrive = motor(PORT19, ratio18_1, true);
-    motor rightRearDrive = motor(PORT20, ratio18_1, true); 
+    motor leftRearDrive = motor(PORT13, ratio18_1, false);
+    motor rightForwardDrive = motor(PORT20, ratio18_1, true);
+    motor rightRearDrive = motor(PORT19, ratio18_1, true); 
 
     const controller::axis forwardAxis = controller1.Axis3;
     const controller::axis turnAxis = controller1.Axis1;
 
+    const double autonDriveSpeed = 75.0;
     const double inchesPerRevolution = 11.5;
     const double degreesPerRevolution = 95.0;
 
@@ -39,6 +40,7 @@ public:
     void drive();
 
     void driveForward(double distance);
+    void driveBackward(double distace);
     void turn(double degrees, turnType direction);
 };
 
@@ -70,7 +72,7 @@ void DriveTrain::spinRight(double velocity, directionType direction = fwd) {
 
 
 bool DriveTrain::isStationary() {
-    return ! (
+    return NOT (
         rightForwardDrive.isSpinning() ||
         leftForwardDrive.isSpinning() ||
         rightRearDrive.isSpinning() ||
@@ -139,26 +141,31 @@ void DriveTrain::driveForward(double inches) {
     zeroMotors();
 
     double revolutions = inches / inchesPerRevolution;
-    setMotorVelocity(75.0 * sign(revolutions));
+    setMotorVelocity(autonDriveSpeed * sign(revolutions));
 
     spinMotorsToPosition(revolutions, rev);
+}
+
+
+void DriveTrain::driveBackward(double inches) {
+    driveForward(-inches);
 }
 
 
 void DriveTrain::turn(double degrees, turnType direction) {
     zeroMotors();
 
-    double revolutions = 1.0 /*degrees / degreesPerRevolution*/;
+    double revolutions = degrees / degreesPerRevolution;
     double revSign = sign(revolutions);
 
     if (direction == left) {
-        setLeftMotorVelocity(-75.0 * revSign);
-        setRightMotorVelocity(75.0 * revSign);
+        setLeftMotorVelocity(-autonDriveSpeed * revSign);
+        setRightMotorVelocity(autonDriveSpeed * revSign);
         spinLeftToPosition(-revolutions, rev);
         spinRightToPosition(revolutions, rev);
     } else {
-        setLeftMotorVelocity(75.0 * revSign);
-        setRightMotorVelocity(-75.0 * revSign);
+        setLeftMotorVelocity(autonDriveSpeed * revSign);
+        setRightMotorVelocity(-autonDriveSpeed * revSign);
         spinLeftToPosition(revolutions, rev);
         spinRightToPosition(-revolutions, rev);
     }

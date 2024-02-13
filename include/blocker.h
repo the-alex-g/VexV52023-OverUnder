@@ -5,11 +5,11 @@
 
 class Blocker {
 private:
-    motor leftMotor = motor(PORT1, ratio18_1, true);
-    motor rightMotor = motor(PORT16, ratio18_1, false);
+    motor leftMotor = motor(PORT16, ratio18_1, true);
+    motor rightMotor = motor(PORT15, ratio18_1, false);
 
-    const double fullExtensionRotation = 1.65;
-    const double fullRetractionRotation = 0.0;
+    const double fullExtensionRevolutions = 1.45;
+    const double fullRetractionRevolutions = 0.0;
 public:
     controller::button extendButton = controller1.ButtonB;
     bool isExtended = false;
@@ -28,9 +28,9 @@ Blocker::Blocker() {
 
 void Blocker::setExtended(bool value) {
     isExtended = value;
-    double target = fullRetractionRotation;
-    if (! isExtended) {
-        target = fullExtensionRotation;
+    double target = fullRetractionRevolutions;
+    if (NOT isExtended) {
+        target = fullExtensionRevolutions;
     }
     leftMotor.spinToPosition(target, rev, false);
     rightMotor.spinToPosition(target, rev, false);
@@ -38,8 +38,8 @@ void Blocker::setExtended(bool value) {
 
 
 void Blocker::toggleExtended() {
-    if (! leftMotor.isSpinning()) {
-        setExtended(! isExtended);
+    if (NOT leftMotor.isSpinning()) {
+        setExtended(NOT isExtended);
     }
 }
 

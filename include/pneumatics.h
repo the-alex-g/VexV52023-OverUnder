@@ -29,7 +29,7 @@ void PneumaticSystem::setWingsOpen(bool value) {
 
 
 void PneumaticSystem::toggleWingsOpen() {
-    setWingsOpen(! wingsOpen);
+    setWingsOpen(NOT wingsOpen);
 }
 
  

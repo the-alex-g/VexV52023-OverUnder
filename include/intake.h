@@ -5,7 +5,7 @@
 
 class Intake {
 private:
-    motor intakeMotor = motor(PORT18, ratio18_1, false);
+    motor intakeMotor = motor(PORT14, ratio18_1, false);
     const double intakePercentVelocity = 100.0;
 public:
     const controller::button intakeInButton = controller1.ButtonR1;
@@ -46,8 +46,8 @@ void Intake::spinIntakeInFor(double seconds) {
     intakeMotor.spin(fwd);
     double timeElapsed = 0.0;
     while (timeElapsed < seconds) {
-        wait(0.1, sec);
-        timeElapsed += 0.1;
+        wait(50, msec);
+        timeElapsed += 0.05;
     }
     intakeMotor.stop();
 }
@@ -57,8 +57,8 @@ void Intake::spinIntakeOutFor(double seconds) {
     intakeMotor.spin(reverse);
     double timeElapsed = 0.0;
     while (timeElapsed < seconds) {
-        wait(0.1, sec);
-        timeElapsed += 0.1;
+        wait(50, msec);
+        timeElapsed += 0.05;
     }
     intakeMotor.stop();
 }

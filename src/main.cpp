@@ -1,18 +1,7 @@
-/*----------------------------------------------------------------------------*/
-/*                                                                            */
-/*    Module:       main.cpp                                                  */
-/*    Author:       CodingConnector19                                         */
-/*    Created:      9/14/2023, 6:09:05 PM                                     */
-/*    Description:  V5 project                                                */
-/*                                                                            */
-/*----------------------------------------------------------------------------*/
-
 #include "universals.h"
 #include "functionInterface.h"
 #include "autonomous.h"
-
-// A global instance of competition
-competition Competition;
+#include "autonPicker.h"
 
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
@@ -32,6 +21,7 @@ void pre_auton() {
   blocker.extendButton.pressed(toggleBlockerExtended);
 }
 
+
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
 /*                              Autonomous Task                              */
@@ -43,8 +33,8 @@ void pre_auton() {
 /*---------------------------------------------------------------------------*/
 
 void autonomous() {
-  runAuton();
-}
+  runAuton(autonToRun);  
+};
 
 /*---------------------------------------------------------------------------*/
 /*                                                                           */
@@ -60,6 +50,11 @@ void usercontrol() {
   while (true) {
     
     runDriveMotors();
+    intake.intakeInButton.pressed(spinIntakeIn);
+    intake.intakeOutButton.pressed(spinIntakeOut);
+    catapult.spinCatapultButton.pressed(fireCatapult);
+    pneumaticSystem.toggleWingsButton.pressed(toggleWingState);
+    blocker.extendButton.pressed(toggleBlockerExtended);
 
     wait(20, msec);
   }
@@ -67,14 +62,14 @@ void usercontrol() {
 
 
 int main() {
-  // Set up callbacks for autonomous and driver control periods.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
 
-  pre_auton();
+  pickAuton();
 
-  // Prevent main from exiting with an infinite loop.
+  pneumaticSystem.setWingsOpen(false);
+
   while (true) {
-    wait(100, msec);
+    wait(20.0, msec);
   }
 }
