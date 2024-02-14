@@ -67,8 +67,6 @@ int main() {
 
   pickAuton();
 
-  pneumaticSystem.setWingsOpen(false);
-
   while (true) {
     wait(20.0, msec);
   }
