@@ -18,11 +18,11 @@ public:
 
 void PneumaticSystem::setWingsOpen(bool value) {
     if (value) {
-        wingLeft.open();
-        wingRight.open();
-    } else {
         wingLeft.close();
         wingRight.close();
+    } else {
+        wingLeft.open();
+        wingRight.open();
     }
     wingsOpen = value;
 }

@@ -6,31 +6,6 @@
 #include "intake.h"
 
 
-void runAutonR2() {
-    intake.spinIntakeInFor(1.0);
-    driveTrain.driveForward(48.0);
-    
-    waitUntil(driveTrain.isStationary());
-    
-    driveTrain.turn(90.0, left);
-    
-    wait(750, msec);
-    
-    intake.spinIntakeOutFor(1.0);
-    driveTrain.driveForward(7.0);
-
-    wait(250, msec);
-    
-    driveTrain.driveForward(9.0);
-    intake.spinIntakeOutFor(3.5);
-}
-
-
-void runAutonB1(){
-    driveTrain.driveForward(1.0);
-}
-
-
 void runAutonR1(){
     intake.spinIntakeInFor(1.0);
     driveTrain.driveForward(48.0);
@@ -47,8 +22,26 @@ void runAutonR1(){
 
     intake.spinIntakeOutFor(1.0);
     driveTrain.driveForward(12.0);
+}
 
-    wait(250, msec);
+
+void runAutonR2() {
+    intake.spinIntakeInFor(1.0);
+    driveTrain.driveForward(48.0);
+    
+    waitUntil(driveTrain.isStationary());
+    
+    driveTrain.turn(90.0, left);
+    
+    wait(750, msec);
+    
+    driveTrain.driveForward(9.0);
+    intake.spinIntakeOutFor(3.5);
+}
+
+
+void runAutonB1(){
+    driveTrain.driveForward(1.0);
 }
 
 
