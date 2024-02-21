@@ -1,6 +1,7 @@
 #pragma once
 
 #include "universals.h"
+#include "controllerBindings.h"
 
 
 class Intake {
@@ -8,9 +9,6 @@ private:
     motor intakeMotor = motor(PORT14, ratio18_1, false);
     const double intakePercentVelocity = 100.0;
 public:
-    const controller::button intakeInButton = controller1.ButtonR1;
-    const controller::button intakeOutButton = controller1.ButtonR2;
-
     Intake();
     void spinIntakeOut();
     void spinIntakeIn();

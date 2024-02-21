@@ -9,7 +9,6 @@ private:
     const double maxCatapultPercentVelocity = 100.0;
     motor catapultMotor = motor(PORT12, ratio18_1, true);
 public:
-    const controller::button spinCatapultButton = controller1.ButtonY;
     Catapult();
     void spinCatapult();
 };

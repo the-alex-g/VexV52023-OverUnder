@@ -7,30 +7,53 @@ class PneumaticSystem {
 private:
     pneumatics wingRight = pneumatics(Brain.ThreeWirePort.A);
     pneumatics wingLeft = pneumatics(Brain.ThreeWirePort.B);
+    bool leftWingOpen = false;
+    bool rightWingOpen = false;
 public:
-    const controller::button toggleWingsButton = controller1.ButtonA;
-
-    bool wingsOpen = false;
+    void setWingOpen(bool value, turnType side);
+    void toggleWingOpen(turnType side);
     void setWingsOpen(bool value);
     void toggleWingsOpen();
 };
 
 
-void PneumaticSystem::setWingsOpen(bool value) {
-    if (value) {
-        wingLeft.close();
-        wingRight.close();
-    } else {
-        wingLeft.open();
-        wingRight.open();
+void PneumaticSystem::setWingOpen(bool value, turnType side) {
+    if (side == right) {
+        if (value) {
+          wingRight.open(); 
+        } else {
+            wingRight.close();
+        }
+        rightWingOpen = value;
+    } else if (side == left) {
+        if (value) {
+            wingLeft.open();
+        } else {
+            wingLeft.close();
+        }
+        leftWingOpen = value;
     }
-    wingsOpen = value;
+}
+
+
+void PneumaticSystem::toggleWingOpen(turnType side) {
+    if (side == right) {
+        setWingOpen(NOT rightWingOpen, right);
+    } else if (side == left) {
+        setWingOpen(NOT leftWingOpen, left);
+    }
+}
+
+
+void PneumaticSystem::setWingsOpen(bool value) {
+    setWingOpen(value, left);
+    setWingOpen(value, right);
 }
 
 
 void PneumaticSystem::toggleWingsOpen() {
-    setWingsOpen(NOT wingsOpen);
+    setWingsOpen(NOT (leftWingOpen && rightWingOpen));
 }
 
- 
+
 PneumaticSystem pneumaticSystem;

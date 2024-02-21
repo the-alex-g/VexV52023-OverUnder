@@ -11,7 +11,6 @@ private:
     const double fullExtensionRevolutions = 1.45;
     const double fullRetractionRevolutions = 0.0;
 public:
-    controller::button extendButton = controller1.ButtonB;
     bool isExtended = false;
 
     Blocker();

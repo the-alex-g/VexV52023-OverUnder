@@ -2,6 +2,7 @@
 #include "functionInterface.h"
 #include "autonomous.h"
 #include "autonPicker.h"
+#include "controllerBindings.h"
 
 /*---------------------------------------------------------------------------*/
 /*                          Pre-Autonomous Functions                         */
@@ -14,11 +15,7 @@
 /*---------------------------------------------------------------------------*/
 
 void pre_auton() {
-  intake.intakeInButton.pressed(spinIntakeIn);
-  intake.intakeOutButton.pressed(spinIntakeOut);
-  catapult.spinCatapultButton.pressed(fireCatapult);
-  pneumaticSystem.toggleWingsButton.pressed(toggleWingState);
-  blocker.extendButton.pressed(toggleBlockerExtended);
+  return;
 }
 
 
@@ -50,11 +47,13 @@ void usercontrol() {
   while (true) {
     
     runDriveMotors();
-    intake.intakeInButton.pressed(spinIntakeIn);
-    intake.intakeOutButton.pressed(spinIntakeOut);
-    catapult.spinCatapultButton.pressed(fireCatapult);
-    pneumaticSystem.toggleWingsButton.pressed(toggleWingState);
-    blocker.extendButton.pressed(toggleBlockerExtended);
+    intakeInButton.pressed(spinIntakeIn);
+    intakeOutButton.pressed(spinIntakeOut);
+    spinCatapultButton.pressed(fireCatapult);
+    toggleWingsButton.pressed(toggleWingState);
+    toggleLeftWingButton.pressed(toggleLeftWing);
+    toggleRightWingButton.pressed(toggleRightWing);
+    extendButton.pressed(toggleBlockerExtended);
 
     wait(20, msec);
   }

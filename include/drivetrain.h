@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include "universals.h"
+#include "controllerBindings.h"
 
 
 double sign(double value) {
@@ -14,10 +15,7 @@ private:
     motor leftForwardDrive = motor(PORT11, ratio18_1, false);
     motor leftRearDrive = motor(PORT13, ratio18_1, false);
     motor rightForwardDrive = motor(PORT20, ratio18_1, true);
-    motor rightRearDrive = motor(PORT19, ratio18_1, true); 
-
-    const controller::axis forwardAxis = controller1.Axis3;
-    const controller::axis turnAxis = controller1.Axis1;
+    motor rightRearDrive = motor(PORT19, ratio18_1, true);
 
     const double autonDriveSpeed = 75.0;
     const double inchesPerRevolution = 11.5;
