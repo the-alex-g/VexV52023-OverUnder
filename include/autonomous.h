@@ -9,17 +9,18 @@
 
 void basicAuton(turnType turnDirection) {
   intake.spinIntakeInFor(1.0);
-    driveTrain.driveForward(48.0);
+  driveTrain.driveForward(48.0);
 
-    waitUntil(driveTrain.isStationary());
-    
-    driveTrain.turn(90.0, turnDirection);
+  waitUntil(driveTrain.isStationary());
+  
+  driveTrain.turn(90.0, turnDirection);
 
-    wait(750, msec);
+  wait(750, msec);
 
-    intake.spinIntakeOutFor(2.0);
-    driveTrain.driveForward(6.0);
-    intake.spinIntakeOutFor(2.0);
+  intake.spinIntakeOutFor(2.0);
+  driveTrain.driveForward(6.0);
+  intake.spinIntakeOutFor(2.0);
+  driveTrain.driveBackward(12.0);
 }
 
 
