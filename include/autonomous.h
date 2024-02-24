@@ -33,8 +33,7 @@ void runAuton2() {
 }
 
 void runAuton3() {
-    driveTrain.driveForward(4.0);
-    catapult.spinCatapultFor(15.0);
+    catapult.spinCatapultFor(60.0);
 }
 
 void runAuton4() {
