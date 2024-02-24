@@ -3,6 +3,7 @@
 #include "universals.h"
 #include "drivetrain.h"
 #include "pneumatics.h"
+#include "catapult.h"
 #include "intake.h"
 
 
@@ -16,42 +17,40 @@ void basicAuton(turnType turnDirection) {
 
     wait(750, msec);
 
-    driveTrain.driveForward(9.0);
-    intake.spinIntakeOutFor(3.0);
+    intake.spinIntakeOutFor(2.0);
+    driveTrain.driveForward(6.0);
+    intake.spinIntakeOutFor(2.0);
 }
 
 
-// Red side right
-void runAutonR1(){
+void runAuton1() {
     basicAuton(right);
 }
 
 
-// Blue side left
-void runAutonR2() {
+void runAuton2() {
     basicAuton(left);
 }
 
-// Red side left
-void runAutonB1(){
-    basicAuton(left);
+void runAuton3() {
+    driveTrain.driveForward(4.0);
+    catapult.spinCatapultFor(15.0);
 }
 
-// Blue side right
-void runAutonB2(){
-    basicAuton(right);
+void runAuton4() {
 }
 
 
 void runAuton(int auton) {
-    switch (auton) {
-      case 0:
-        runAutonR1();
-      case 1:
-        runAutonR2();
-      case 2:
-        runAutonB1();
-      case 3:
-        runAutonB2();
-    }
+  pneumaticSystem.setWingsOpen(false);
+  switch (auton) {
+    case 0:
+      runAuton1();
+    case 1:
+      runAuton2();
+    case 2:
+      runAuton3();
+    case 3:
+      runAuton4();
+  }
 }

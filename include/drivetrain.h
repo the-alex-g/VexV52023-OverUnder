@@ -10,6 +10,11 @@ double sign(double value) {
 }
 
 
+double lerp(double from, double to, double weight) {
+    return from + (to - from) * weight;
+}
+
+
 class DriveTrain {
 private:
     motor leftForwardDrive = motor(PORT11, ratio18_1, false);

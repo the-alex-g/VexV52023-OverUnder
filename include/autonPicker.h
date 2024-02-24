@@ -42,10 +42,10 @@ bool Button::isClicked() {
 
 
 Button autonButtons[] = {
-  Button(270, 170, 200, 60, "Auton Red 1", red),
-  Button(15, 170, 200, 60, "Auton Red 2", red),
-  Button(15, 15, 200, 60, "Auton Blue 1", blue),
-  Button(270, 15, 200, 60, "Auton Blue 2", blue)
+  Button(270, 170, 200, 60, "Turn Right", red),
+  Button(15, 170, 200, 60, "Turn Left", red),
+  Button(15, 15, 200, 60, "Catapult", blue),
+  Button(270, 15, 200, 60, "No Auton", blue)
 };
 
 

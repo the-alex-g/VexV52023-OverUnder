@@ -22,6 +22,8 @@ public:
 Blocker::Blocker() {
     leftMotor.setPosition(0.0, rev);
     rightMotor.setPosition(0.0, rev);
+    leftMotor.setVelocity(100.0, percent);
+    rightMotor.setVelocity(100.0, percent);
 }
 
 

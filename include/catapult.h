@@ -11,19 +11,30 @@ private:
 public:
     Catapult();
     void spinCatapult();
+    void spinCatapultFor(double time);
 };
 
 
 Catapult::Catapult() {
     catapultMotor.setBrake(hold);
+    catapultMotor.setVelocity(maxCatapultPercentVelocity, percent);
 }
 
 
 void Catapult::spinCatapult() {
     catapultMotor.spin(fwd);
-    catapultMotor.setVelocity(maxCatapultPercentVelocity, percent);
     while (spinCatapultButton.pressing()) {
         wait(20.0, msec);
+    }
+    catapultMotor.stop();
+}
+
+
+void Catapult::spinCatapultFor(double time) {
+    catapultMotor.spin(fwd);
+    while (time > 0.0) {
+        wait(0.05, sec);
+        time -= 0.05;
     }
     catapultMotor.stop();
 }

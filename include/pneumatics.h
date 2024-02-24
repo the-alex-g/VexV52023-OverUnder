@@ -20,16 +20,16 @@ public:
 void PneumaticSystem::setWingOpen(bool value, turnType side) {
     if (side == right) {
         if (value) {
-          wingRight.open(); 
+          wingRight.close(); 
         } else {
-            wingRight.close();
+            wingRight.open();
         }
         rightWingOpen = value;
     } else if (side == left) {
         if (value) {
-            wingLeft.open();
-        } else {
             wingLeft.close();
+        } else {
+            wingLeft.open();
         }
         leftWingOpen = value;
     }
