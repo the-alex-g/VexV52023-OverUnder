@@ -29,9 +29,6 @@ private:
     void spinLeftToPosition(double position, rotationUnits rotationType);
     void spinRightToPosition(double position, rotationUnits rotationType);
 public:
-    double getForwardAxisPosition();
-    double getTurnAxisPosition();
-
     void spinLeft(double velocity, directionType direction);
     void spinRight(double velocity, directionType direction);
     bool isStationary();
@@ -41,16 +38,6 @@ public:
     void driveBackward(double distace);
     void turn(double degrees, turnType direction);
 };
-
-
-double DriveTrain::getForwardAxisPosition() {
-    return forwardAxis.position() / 2.0;
-}
-
-
-double DriveTrain::getTurnAxisPosition() {
-    return turnAxis.position() / 2.0;
-}
 
 
 void DriveTrain::spinLeft(double velocity, directionType direction = fwd) {
@@ -80,8 +67,14 @@ bool DriveTrain::isStationary() {
 
 
 void DriveTrain::drive() {
-    double forward = getForwardAxisPosition();
-    double turn = getTurnAxisPosition();
+    double forward = forwardAxis.position(); // between -100 and 100
+    double turn = turnAxis.position() / 2.0; // between -50 and 50
+
+    if (sign(forward) == sign(turn)) {
+        forward -= turn;
+    } else {
+        forward += turn;
+    }
 
     double leftVelocity = forward + turn;
     double rightVelocity = forward - turn;
