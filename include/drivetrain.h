@@ -22,7 +22,7 @@ private:
     motor rightForwardDrive = motor(PORT20, ratio18_1, true);
     motor rightRearDrive = motor(PORT19, ratio18_1, true);
 
-    const double autonDriveSpeed = 75.0;
+    const double autonDriveSpeed = 100.0;
     const double inchesPerRevolution = 11.5;
     const double degreesPerRevolution = 95.0;
 
@@ -152,16 +152,16 @@ void DriveTrain::turn(double degrees, turnType direction) {
     zeroMotors();
 
     double revolutions = degrees / degreesPerRevolution;
-    double revSign = sign(revolutions);
+    double velocity = sign(revolutions) * autonDriveSpeed;
 
     if (direction == left) {
-        setLeftMotorVelocity(-autonDriveSpeed * revSign);
-        setRightMotorVelocity(autonDriveSpeed * revSign);
+        setLeftMotorVelocity(-velocity);
+        setRightMotorVelocity(velocity);
         spinLeftToPosition(-revolutions, rev);
         spinRightToPosition(revolutions, rev);
     } else {
-        setLeftMotorVelocity(autonDriveSpeed * revSign);
-        setRightMotorVelocity(-autonDriveSpeed * revSign);
+        setLeftMotorVelocity(velocity);
+        setRightMotorVelocity(-velocity);
         spinLeftToPosition(revolutions, rev);
         spinRightToPosition(-revolutions, rev);
     }
