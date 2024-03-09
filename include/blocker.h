@@ -8,7 +8,7 @@ private:
     motor leftMotor = motor(PORT16, ratio18_1, true);
     motor rightMotor = motor(PORT15, ratio18_1, false);
 
-    const double fullExtensionRevolutions = 1.45;
+    const double fullExtensionRevolutions = 1.3;
     const double fullRetractionRevolutions = 0.0;
 public:
     bool isExtended = false;

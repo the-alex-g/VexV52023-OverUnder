@@ -8,18 +8,19 @@
 
 
 void basicAuton(turnType turnDirection) {
-  driveTrain.driveForward(48.0);
+  driveTrain.driveForward(42.0);
 
   wait(2.0, sec);
   
-  driveTrain.turn(90.0, turnDirection);
+  driveTrain.turn(85.0, turnDirection);
 
   wait(1.0, sec);
 
   pneumaticSystem.setWingsOpen(true);
+  intake.spinIntakeOutFor(1.0);
   driveTrain.driveForward(10.0);
   intake.spinIntakeOutFor(2.0);
-
+ 
   driveTrain.driveBackward(12.0);
   intake.spinIntakeOutFor(2.0);
 
