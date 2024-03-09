@@ -6,7 +6,7 @@
 
 class Intake {
 private:
-    motor intakeMotor = motor(PORT14, ratio18_1, false);
+    motor intakeMotor = motor(PORT14, ratio18_1, true);
     const double intakePercentVelocity = 100.0;
 public:
     Intake();
